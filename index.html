@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="./">
+    <title>Speedometer</title>
+
+    <!-- Style -->
+    <style>
+        .container {
+            width: 100%;
+            max-width: 1440px;
+            padding: 0 10px;
+            margin: 0 auto;
+        }
+        .circle {
+            max-width: 440px;
+            max-height: 440px;
+            margin: 0 auto;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .circle__inner {
+            content:"";
+            position: absolute;
+            bottom: 191px;
+            width: 56px;
+            height: 176px;
+            transform-origin: 50% calc(100% - 29px);
+            background: url('./img/dial.png') center/contain no-repeat;
+            transition: 1s;
+        }
+        .transform {
+            transform: rotate(240deg);
+        }
+    </style>
+    <!-- End Style -->
+</head>
+<body>
+    <div class="container">
+        <div class="circle">
+            <img class="circle__img"
+                 src="./img/meter.png"
+                 alt="">
+            <div class="circle__inner transform"></div>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script type="text/javascript">
+
+        const container = document.querySelector('.container');
+        const circle = document.querySelector('.circle');
+        const img = document.querySelector('.circle__img');
+        const circleInner = document.querySelector('.circle__inner');
+
+        let rotate = 240;
+        const MAX_SPEED_COUNT = 180;
+        const MIN_ROTATE = 240;
+        const proportion = MIN_ROTATE / MAX_SPEED_COUNT;
+
+        setInterval(() => {
+            RotatePointer();
+        }, 4000);
+
+        function RotatePointer() {
+            let num = Math.ceil(Math.random() * MAX_SPEED_COUNT);
+            if (0 < num && num <= MIN_ROTATE) {
+                rotate = MIN_ROTATE + (num * proportion);
+                circleInner.style = `transform: rotate(${rotate}deg)`;
+                if (60 < num && num <= 120) {
+                    circle.style = 'background-color: orange';
+                } else if (120 < num && num <= 180) {
+                    circle.style = 'background-color: red';
+                } else {
+                    circle.style = 'background-color: green';
+                }
+            } else {
+                rotate = MIN_ROTATE;
+                circleInner.style = `transform: rotate(${rotate}deg)`;
+            }
+        }
+    </script>
+    <!-- End Script -->
+</body>
+</html>
