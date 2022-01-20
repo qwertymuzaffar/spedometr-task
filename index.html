@@ -69,22 +69,22 @@
         }, 4000);
 
         function RotatePointer() {
-            let num = Math.ceil(Math.random() * MAX_SPEED_COUNT);
-            if (0 < num && num <= MIN_ROTATE) {
-                rotate = MIN_ROTATE + (num * proportion);
-                circleInner.style = `transform: rotate(${rotate}deg)`;
-                if (60 < num && num <= 120) {
-                    circle.style = 'background-color: orange';
-                } else if (120 < num && num <= 180) {
-                    circle.style = 'background-color: red';
-                } else {
-                    circle.style = 'background-color: green';
-                }
-            } else {
-                rotate = MIN_ROTATE;
-                circleInner.style = `transform: rotate(${rotate}deg)`;
-            }
+          let num = randomIntFromInterval(0, MAX_SPEED_COUNT);
+          rotate = MIN_ROTATE + (num * proportion);
+          circleInner.style = `transform: rotate(${rotate}deg)`;
+          if (60 < num && num <= 120) {
+            circle.style = 'background-color: rgba(255, 165, 0, 0.2)';
+          } else if (120 < num && num <= 180) {
+            circle.style = 'background-color: rgba(255, 0, 0, 0.2)';
+          } else {
+            circle.style = 'background-color: rgba(0, 128, 0, 0.2)';
+          }
         }
+
+        function randomIntFromInterval(min, max) { // min and max included
+          return Math.floor(Math.random() * (max - min + 1) + min)
+        }
+
     </script>
     <!-- End Script -->
 </body>
